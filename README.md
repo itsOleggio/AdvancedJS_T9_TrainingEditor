@@ -41,7 +41,7 @@ __Функции__
 
 Структура проекта 
 ```
-AdvancedJS_T9_ColorConvertor/
+AdvancedJS_T9_TrainingEditor/
 ├── public/ 
 ├── node_modules/
 ├── assets/ // скрины
