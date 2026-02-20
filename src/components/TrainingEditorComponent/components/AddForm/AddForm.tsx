@@ -1,28 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { ITraining } from "../../../../model/ITraining";
 import { v4 as uuidv4 } from 'uuid';
 
-export function AddForm() {
-  const [records, setRecords] = useState<ITraining[]>(() => {
-    const saved = localStorage.getItem("trainings")
-    return saved ? JSON.parse(saved) : []
-  });
+interface AddFormProps {
+  readonly setRecords: React.Dispatch<React.SetStateAction<ITraining[]>>;
+}
+
+export function AddForm({ setRecords }:AddFormProps){
   const [date, setDate] = useState<string>('');
   const [distance, setDistance] = useState<number>(0);
-  
-  useEffect(() => {
-    localStorage.setItem("trainings", JSON.stringify(records))
-  }, [records])
 
-  const handleSubmit = () => {
-    const newRecord: ITraining = {
-      id: uuidv4(),
-      date,
-      distance
-    }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    setRecords((prev) => [...prev, newRecord])
-  }
+    setRecords(prev => [
+      ...prev,
+      { id: uuidv4(), date, distance }
+    ]);
+  };
   
   return (
     <div className="form-container">
@@ -31,7 +26,7 @@ export function AddForm() {
           <div className="form-group">
             <label htmlFor="date">Дата (ДД.ММ.ГГ)</label>
             <input
-              type="text"
+              type="date"
               id="date"
               name="date"
               placeholder="20.07.2019"

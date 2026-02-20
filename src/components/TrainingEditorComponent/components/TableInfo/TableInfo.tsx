@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import type { ITraining } from "./../../../../model/ITraining";
 import { EditModal } from "../EditModal/EditModal";
 
-export function TableInfo() {
-  const [records, setRecords] = useState<ITraining[]>(() => {
-    const saved = localStorage.getItem("trainings");
-    return saved ? JSON.parse(saved) : [];
-  });
+type Props = {
+  readonly records: ITraining[];
+  readonly setRecords: React.Dispatch<React.SetStateAction<ITraining[]>>;
+};
+
+export function TableInfo({records, setRecords}: Props){
   const [editModal, setEditModal] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<ITraining | null>(null);
 

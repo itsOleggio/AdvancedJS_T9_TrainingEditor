@@ -27,7 +27,7 @@ export const EditModal: React.FC<EditModalProps> = ({ item, onSave, onClose }) =
       <form className="edit-modal form-group" onSubmit={handleSubmit}>
         <label htmlFor="edit-data">Дата</label>
         <input 
-          type="text" 
+          type="date"
           id="edit-data" 
           name="edit-data" 
           defaultValue = {date}
